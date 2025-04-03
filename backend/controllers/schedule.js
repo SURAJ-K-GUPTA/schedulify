@@ -12,7 +12,7 @@ const scheduleInput = z.object({
     email: z.string().email(),
     subject: z.string(),
     emailBody: z.string(),
-    time: z.string().default("in 1 Hour"),
+    time: z.string().transform((val) => val.trim() === "" ? "in 1 hour" : val).default("in 1 hour"),
 })
 
 // Define Agenda Job
@@ -50,12 +50,12 @@ const scheduleController = async (req, res) => {
         return res.status(400).json({ message: "Invalid request", error: result.error.message });
     }
 
-    const { email, subject, emailBody, time } = req.body;
+    const { email, subject, emailBody, time } = result.data;
     const userId = req.userId; 
 
     try {
         // Schedule the email job in 1 hour
-        const job = await agenda.schedule("in 1 minute","sendEmail", {email, subject, emailBody, userId });
+        const job = await agenda.schedule(time,"sendEmail", {email, subject, emailBody, userId });
 
 
         // console.log(job);
