@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/',(req,res)=>{
-    res.send('Hello world')
+    res.json("Welcome to Schedulify...");
 })
 
 app.use('/api/auth', userRouter );
