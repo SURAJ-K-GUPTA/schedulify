@@ -139,7 +139,7 @@ const ReactFlowComponent = () => {
       >
         <Background variant="cross" gap={12} />
         <MiniMap />
-        <Controls />
+        <Controls position='bottom-right' />
         <Panel position="top-left"><LeadSourceNodeCreator setNodes={setNodes} /></Panel>
         <Panel position="top-right"><EmailBodyNodeCreator setNodes={setNodes} /></Panel>
         <Panel position="bottom-left"><DelayInputNodeCreator setNodes={setNodes} /></Panel>
