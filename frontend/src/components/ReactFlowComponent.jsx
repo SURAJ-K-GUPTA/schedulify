@@ -15,7 +15,7 @@ import LeadSourceNodeCreator from './LeadSourceNodeCreator';
 import EmailBody from './EmailBody';
 import EmailBodyNodeCreator from './EmailBodyNodeCreator';
 import DelayInputNodeCreator from './DelayInputNodeCreator';
-import DelayNode from './Delaynode';
+import DelayNode from './DelayNode';
 
 const nodeTypes = {
   leadSource: LeadSource,
