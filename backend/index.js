@@ -12,9 +12,9 @@ connectDB();
 
 
 app.use(cors({
-    origin: '*', 
+    origin: process.env.CLIENT_URL, 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
   }));
   
   // Explicitly handle preflight requests
