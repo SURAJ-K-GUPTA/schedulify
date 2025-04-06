@@ -10,19 +10,19 @@ const scheduleRouter = require('./routes/schedule');
 const app = express();
 connectDB();
 
-// 🔐 CORS Configuration
-const corsOptions = {
-  origin: process.env.CLIENT_URL,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-};
-
-// ✅ Handle CORS
-app.use(cors(corsOptions));
-
-// ✅ Handle preflight requests manually (important!)
-app.options('*', cors(corsOptions));
+// ✅ Manual CORS Middleware for All Requests
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", process.env.FRONTEND_URL);
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  
+    if (req.method === "OPTIONS") {
+      return res.sendStatus(200);
+    }
+  
+    next();
+  });
+  
 
 // JSON parser
 app.use(express.json());
