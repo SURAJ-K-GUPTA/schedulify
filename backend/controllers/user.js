@@ -16,6 +16,21 @@ const signInInput = z.object({
   });
   
 
+const userDetailsController = async (req, res) => {
+    try {
+      // only select name and email
+      
+        const user = await User.findById(req.userId,{});
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        const { username, email, _id } = user;
+        res.status(200).json({ username, email, _id });
+    } catch (error) {
+        return res.status(500).json({ message: "Server error", error: error.message });
+    }
+}
+
 const registerController = async (req, res) => {
   const { success } = signupInput.safeParse(req.body);
   if (!success) {
@@ -83,4 +98,4 @@ const loginController = async (req, res) => {
     }
 }
 
-module.exports = { registerController, loginController };
+module.exports = { registerController, loginController, userDetailsController };
